@@ -30,8 +30,8 @@
 #define SCREENHEIGHT 200
 #endif
 #ifdef ST7789
-#define SCREENWIDTH  320
-#define SCREENHEIGHT 200
+#define SCREENWIDTH  240
+#define SCREENHEIGHT 240
 #endif
 
 #if DOOM_TINY
