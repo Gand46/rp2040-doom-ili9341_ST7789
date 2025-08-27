@@ -276,7 +276,7 @@ const scanvideo_mode_t vga_mode_320x200 =
                 .width = 320,
                 #endif
                 #ifdef ST7789
-                .width = 160,
+                .width = 240,
                 #endif
 #else
                 .width = 640,
@@ -289,10 +289,10 @@ const scanvideo_mode_t vga_mode_320x200 =
                 .yscale = 5,
                 #endif
                 #ifdef ST7789
-                .xscale = 2,
-                .yscale = 5,
+                .xscale = 1,
+                .yscale = 1,
 
-                .height = 200,
+                .height = 240,
                 #endif
                 // .xscale = 2,
                 // .yscale = 5,
@@ -1474,22 +1474,13 @@ void ili9341_infones_frame_timing_register_init()
 }
 void st7789_infones_frame_timing_register_init()
 {
-        uint8_t command;
-        uint8_t data[4];
-        int x=0;
+        display_set_address(0, 0, DISPLAY_WIDTH - 1, DISPLAY_HEIGHT - 1);
 
-
-
-        // display_set_address(0, 0, (SCREENWIDTH)/2, (MAIN_VIEWHEIGHT)/2);
-        display_set_address(0, 10, (SCREENWIDTH)/2, 96+3+10);
-
-////
         /*
          *   keep chip select active, let the next data be written continuously
          */
         gpio_put(DISPLAY_PIN_DC, 1);
         gpio_put(DISPLAY_PIN_CS, 0);
-
 }
 
 void I_InitGraphics(void)

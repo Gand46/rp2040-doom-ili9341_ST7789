@@ -57,8 +57,8 @@ typedef WORD            WCHAR;  /* UTF-16 character type */
 #define    DISPLAY_HEIGHT 240
 #endif
 #ifdef ST7789
-#define    DISPLAY_WIDTH 160
-#define    DISPLAY_HEIGHT 128
+#define    DISPLAY_WIDTH 240
+#define    DISPLAY_HEIGHT 240
 #endif
 
 #undef    DISPLAY_INVERT 
@@ -68,13 +68,13 @@ const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 /*
  *
  */
-#define UP 9
+#define UP 4
 #define DN 5
-#define LT 8
-#define RT 6
-#define SL 28
-#define ST 4
-#define A 2
-#define B 3
+#define LT 3
+#define RT 2
+#define SL 6
+#define ST 7
+#define A 8
+#define B 9
 
 #endif
