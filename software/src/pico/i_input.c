@@ -521,14 +521,14 @@ static void pico_quit(void) {
 }
 #endif
 //dahai
-#define PIN_UP 9
-#define PIN_DN 5
-#define PIN_LT 8
-#define PIN_RT 6
-#define PIN_SL 28
-#define PIN_ST 4
-#define PIN_A 2
-#define PIN_B 3
+#define PIN_RT  2
+#define PIN_LT  3
+#define PIN_UP  4
+#define PIN_DN  5
+#define PIN_SL  6
+#define PIN_ST  7
+#define PIN_A   8
+#define PIN_B   9
 
 void magc_key_init(void) {
     gpio_deinit(PIN_UP);

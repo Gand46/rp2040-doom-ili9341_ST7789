@@ -33,10 +33,7 @@ target_include_directories(common_pico INTERFACE
 
 target_compile_definitions(common_pico INTERFACE
         NO_USE_MOUSE=1
-        #dahai
-        PICO_AUDIO_I2S_PIO=1
-        PICO_AUDIO_I2S_DMA_IRQ=1
-        )
+)
 
 pico_generate_pio_header(common_pico ${CMAKE_CURRENT_LIST_DIR}/video_doom.pio)
 target_link_libraries(common_pico INTERFACE pico_stdlib pico_multicore pico_scanvideo_dpi)
@@ -52,13 +49,11 @@ endif()
 #dahai
 # disable scanvideo's pin
 target_compile_definitions(common_pico INTERFACE
-    PICO_SCANVIDEO_COLOR_PIN_BASE=30 
+    PICO_SCANVIDEO_COLOR_PIN_BASE=30
     PICO_SCANVIDEO_SYNC_PIN_BASE=30
-    PICO_AUDIO_I2S_DATA_PIN=7
-    PICO_AUDIO_I2S_CLOCK_PIN_BASE=30
 )
 
-target_link_libraries(common_pico INTERFACE hardware_spi)
+target_link_libraries(common_pico INTERFACE hardware_spi hardware_pwm pico_audio_pwm)
 
 set(SD_SPI "spi1" CACHE STRING "Specify the SPI bus for the SD card")
 set(SD_CS "13" CACHE STRING "Specify the Chip Select GPIO pin for the SD card")
@@ -70,12 +65,12 @@ set(SD_MISO "12" CACHE STRING "Select the Master In Slave Out GPIO pin for the S
 set(LCD_CONTROLLER "ST7789" CACHE STRING "Select the LCD controller type")
 
 set(LCD_SPI "spi0")
-set(LCD_DC "20")
-set(LCD_CS "17")
+set(LCD_DC "17")
+set(LCD_CS "21")
 set(LCD_CLK "18")
 set(LCD_MOSI "19")
-set(LCD_RST "21")
-set(LCD_BL "22")
+set(LCD_RST "20")
+set(LCD_BL "16")
 set(LCD_MISO "-1")
 
 message("SD card SPI         : ${SD_SPI}")
@@ -108,13 +103,12 @@ target_compile_definitions(common_pico INTERFACE
     DISPLAY_PIN_MISO=${LCD_MISO}
 )
 
-    #target_link_libraries(common_pico INTERFACE  hardware_pwm)
-    #target_link_libraries(common_pico INTERFACE  pico_audio_pwm)
 target_compile_definitions(common_pico INTERFACE
-        #PICO_AUDIO_PWM_PIO=7
-        #USE_CUSTOM_AUDIO_PWM=1
-        USE_AUDIO_I2S=1
-        #USE_AUDIO_PWM=1
+        USE_AUDIO_PWM=1
+        PICO_AUDIO_PWM_PIN_BASE=14
+        PICO_AUDIO_PWM_PIN_COUNT=2
+        PICO_AUDIO_PWM_LEFT_PIN=14
+        PICO_AUDIO_PWM_RIGHT_PIN=15
 )
 if(LCD_CONTROLLER STREQUAL "ILI9341")
     add_compile_definitions(ILI9341)
